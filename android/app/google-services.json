@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "123271176890",
+    "project_id": "flixxi-fa931",
+    "storage_bucket": "flixxi-fa931.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123271176890:android:bd504073a1284918529883",
+        "android_client_info": {
+          "package_name": "com.example.bioskop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUjg2tYZ87JVVeILixjHI8W-9oEZYfUv0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
