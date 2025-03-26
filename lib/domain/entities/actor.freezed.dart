@@ -12,7 +12,6 @@ part of 'actor.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$Actor {
 
@@ -23,8 +22,6 @@ mixin _$Actor {
 @pragma('vm:prefer-inline')
 $ActorCopyWith<Actor> get copyWith => _$ActorCopyWithImpl<Actor>(this as Actor, _$identity);
 
-  /// Serializes this Actor to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -32,7 +29,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is Actor&&(identical(other.name, name) || other.name == name)&&(identical(other.profilePath, profilePath) || other.profilePath == profilePath));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,name,profilePath);
 
@@ -78,11 +75,11 @@ as String?,
 
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _Actor implements Actor {
    _Actor({required this.name, this.profilePath});
-  factory _Actor.fromJson(Map<String, dynamic> json) => _$ActorFromJson(json);
+  
 
 @override final  String name;
 @override final  String? profilePath;
@@ -93,17 +90,14 @@ class _Actor implements Actor {
 @pragma('vm:prefer-inline')
 _$ActorCopyWith<_Actor> get copyWith => __$ActorCopyWithImpl<_Actor>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$ActorToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _Actor&&(identical(other.name, name) || other.name == name)&&(identical(other.profilePath, profilePath) || other.profilePath == profilePath));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,name,profilePath);
 

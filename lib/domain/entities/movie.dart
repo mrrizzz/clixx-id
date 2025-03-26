@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'movie.freezed.dart';
 
 @freezed
-class Movie with _$Movie {
+abstract class Movie with _$Movie {
   factory Movie({required int id, required String title, String? posterPath}) =
       _Movie;
 

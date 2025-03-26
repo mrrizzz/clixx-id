@@ -11,7 +11,8 @@ class DummyAuthentication implements Authentication{
   @override
   Future<Result<String>> login({required String email, required String password}) async {
     await Future.delayed(const Duration(seconds: 1));
-    return const Result.success('ID-12345');
+    // return const Result.success('ID-12345');
+    return const Result.failed('message');
   }
 
   @override
