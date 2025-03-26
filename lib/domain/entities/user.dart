@@ -9,7 +9,7 @@ abstract class User with _$User {
     required String uid,
     required String name,
     required String email,
-    String? photourl,
+    String? photoUrl,
     @Default(0) int balance,
   }) = _User;
 
