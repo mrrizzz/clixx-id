@@ -1,48 +1,107 @@
-import 'package:bioskop/presentation/providers/usecases/login_provider.dart';
+import 'package:bioskop/presentation/extensions/build_context_extension.dart';
+import 'package:bioskop/presentation/misc/methods.dart';
+import 'package:bioskop/presentation/providers/router/router_provider.dart';
+import 'package:bioskop/presentation/providers/user_data/user_data_provider.dart';
+import 'package:bioskop/presentation/widgets/clix_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:bioskop/data/dummies/dummy_authentication.dart';
-import 'package:bioskop/data/dummies/dummy_user_repository.dart';
-import 'package:bioskop/data/firebase/firebase_authentication.dart';
-import 'package:bioskop/data/firebase/firebase_user_repository.dart';
-import 'package:bioskop/domain/usecases/login/login.dart';
-import 'package:bioskop/presentation/pages/main_page.dart';
-
 class LoginPage extends ConsumerWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(
+      userDataProvider,
+      (previous, next) {
+        if (next is AsyncData) {
+          if (next.value != null) {
+            ref.read(routerProvider).goNamed('main');
+          }
+        } else if (next is AsyncError) {
+          context.showSnackBar(next.error.toString());
+        }
+      },
+    );
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Login login = ref.watch(loginProvider);
-            
-            login(
-              LoginParams(email: 'johnny@good.com', password: '123456'),
-            ).then((result) {
-              if (result.isSuccess) {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => MainPage(user: result.resultValue!),
-                  ),
-                );
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      result.errorMessage ?? "Login gagal, coba lagi",
+      body: ListView(
+        children: [
+          verticalSpace(100),
+          Center(
+            child: Image.asset(
+              'assets/logo.png',
+              width: 250,
+            ),
+          ),
+          verticalSpace(100),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              children: [
+                ClixTextField(
+                  label: 'Email',
+                  controller: emailController,
+                ),
+                verticalSpace(24),
+                ClixTextField(
+                  label: 'Password',
+                  controller: passwordController,
+                  obscureText: true,
+                ),
+                Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'Forgot password?',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    )),
+                verticalSpace(24),
+                switch (ref.watch(userDataProvider)) {
+                  AsyncData(:final value) => value == null
+                      ? SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                              onPressed: () {
+                                ref.read(userDataProvider.notifier).login(
+                                    email: emailController.text,
+                                    password: passwordController.text);
+                              },
+                              child: const Text(
+                                'Login',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              )),
+                        )
+                      : const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                  _ => const Center(
+                      child: CircularProgressIndicator(),
                     ),
-                  ),
-                );
-              }
-            });
-          },
-          child: const Text('login'),
-        ),
+                },
+                verticalSpace(24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Don't have an account? "),
+                    TextButton(
+                      
+                        onPressed: () {ref.read(routerProvider).goNamed('register');},
+                        child: const Text(
+                          'Register here',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ))
+                  ],
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

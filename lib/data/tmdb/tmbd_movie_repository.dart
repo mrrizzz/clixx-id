@@ -4,12 +4,11 @@ import 'package:bioskop/domain/entities/movie.dart';
 import 'package:bioskop/domain/entities/moviedetail.dart';
 import 'package:bioskop/domain/entities/result.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class TmbdMovieRepository implements MovieRepository{
   final Dio? dio;
 
-  final String accessToken = dotenv.env['TMDB_ACCESS_TOKEN']!;
+  final String accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMTMyMzgzZDI2N2Q1ZmU1ZTdmZjM3NTIzYjQxYTJlOCIsIm5iZiI6MTczNDg1MDU1Ni43NjMsInN1YiI6IjY3NjdiN2ZjOGU5ZDljY2RlYjkxMGQ1OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.k_JY2z41gf3f5vwpKM6PQVJVpIO8rBv23S-wlceOX_s';
   late final Options _options = Options(headers: {
     'Authorization': 'Bearer $accessToken',
     'accept': 'application/json',

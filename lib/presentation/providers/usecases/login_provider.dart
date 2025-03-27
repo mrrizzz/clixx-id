@@ -1,7 +1,6 @@
 import 'package:bioskop/domain/usecases/login/login.dart';
 import 'package:bioskop/presentation/providers/repositories/authetication/authentication_provider.dart';
-import 'package:bioskop/presentation/providers/repositories/user_repositry/user_repository_provider.dart';
-// ignore: depend_on_referenced_packages
+import 'package:bioskop/presentation/providers/repositories/user_repository/user_repository_provider.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

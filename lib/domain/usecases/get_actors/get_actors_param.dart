@@ -1,5 +1,6 @@
 class GetActorsParam {
   final int movieId;
-
-  GetActorsParam(this.movieId);
+  GetActorsParam({
+    required this.movieId,
+  });
 }

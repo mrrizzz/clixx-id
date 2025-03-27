@@ -13,6 +13,7 @@ class GetMovieDetail implements UseCase<Result<MovieDetail>, GetMovieDetailParam
   @override
   Future<Result<MovieDetail>> call(GetMovieDetailParam params) async {
     var movieDetailResult = await _movieRepository.getDetail(id: params.movie.id);
+    
     return switch (movieDetailResult) {
       Success(value: final movieDetail) => Result.success(movieDetail),
       Failed(: final message) => Result.failed(message)

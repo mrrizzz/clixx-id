@@ -1,5 +1,4 @@
 import 'package:bioskop/data/repositories/transaction_repository.dart';
-import 'package:bioskop/data/repositories/user_repository.dart';
 import 'package:bioskop/domain/entities/result.dart';
 import 'package:bioskop/domain/entities/transaction.dart';
 import 'package:bioskop/domain/usecases/create_transaction/create_transaction.dart';
@@ -11,7 +10,6 @@ class TopUp implements UseCase<Result<void>, TopUpParam> {
   final TransactionRepository _transactionRepository;
 
   TopUp({
-    required UserRepository userRepository,
     required TransactionRepository transactionRepository,
   }) : _transactionRepository = transactionRepository;
 

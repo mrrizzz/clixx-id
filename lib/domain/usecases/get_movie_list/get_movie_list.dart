@@ -13,9 +13,9 @@ class GetMovieList implements UseCase<Result<List<Movie>>, GetMovieListParam>{
   @override
   Future<Result<List<Movie>>> call(GetMovieListParam params) async {
     var movieResult =     switch (params.category) {
-       MovieListCategory.nowPlaying =>
+       MovieListCategories.nowPlaying =>
         await _movieRepository.getNowPlaying(page: params.page),
-       MovieListCategory.upComing =>
+       MovieListCategories.upComing =>
         await _movieRepository.getUpComing(page: params.page),
     };
     return switch (movieResult) {
