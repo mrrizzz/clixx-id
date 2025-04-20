@@ -12,14 +12,14 @@ import 'package:bioskop/domain/usecases/upload_profile_picture/upload_profile_pi
 import 'package:bioskop/domain/usecases/upload_profile_picture/upload_profile_picture_param.dart';
 import 'package:bioskop/presentation/providers/movie/now_playing_provider.dart';
 import 'package:bioskop/presentation/providers/movie/upcoming_provider.dart';
-import 'package:bioskop/presentation/providers/transaction_data/transaction_data.dart';
+import 'package:bioskop/presentation/providers/transaction_data/transaction_data_provider.dart';
 import 'package:bioskop/presentation/providers/usecases/get_logged_in_user_provider.dart';
 import 'package:bioskop/presentation/providers/usecases/login_provider.dart';
 import 'package:bioskop/presentation/providers/usecases/logout_provider.dart';
 import 'package:bioskop/presentation/providers/usecases/register_provider.dart';
 import 'package:bioskop/presentation/providers/usecases/top_up_provider.dart';
 import 'package:bioskop/presentation/providers/usecases/upload_profile_picture_provider.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'user_data_provider.g.dart';
@@ -44,53 +44,46 @@ class UserData extends _$UserData {
     state = const AsyncLoading();
     Login login = ref.read(loginProvider);
 
-    var result = await login(LoginParam(email: email, password: password));
+    var result = await login(LoginParams(email: email, password: password));
 
     switch (result) {
       case Success(value: final user):
         _getMovies();
         state = AsyncData(user);
-        break;
-      case Failed(message: final message):
+      case Failed(:final message):
         state = AsyncError(FlutterError(message), StackTrace.current);
         state = const AsyncData(null);
-        break;
     }
   }
 
-  Future<void> register({
-    required String email,
-    required String password,
-    required String name,
-    String? imageUrl,
-  }) async {
+  Future<void> register(
+      {required String email,
+      required String name,
+      required String password,
+      String? imageUrl}) async {
     state = const AsyncLoading();
+
     Register register = ref.read(registerProvider);
 
-    var result = await register(
-      RegisterParam(
-        email: email,
-        password: password,
-        name: name,
-        photoUrl: imageUrl,
-      ),
-    );
+    var result = await register(RegisterParam(
+        name: name, email: email, password: password, photoUrl: imageUrl));
 
     switch (result) {
       case Success(value: final user):
         _getMovies();
         state = AsyncData(user);
-      case Failed(message: final message):
+
+      case Failed(:final message):
         state = AsyncError(FlutterError(message), StackTrace.current);
-        state = const AsyncData(null);
     }
   }
 
   Future<void> refreshUserData() async {
     GetLoggedInUser getLoggedInUser = ref.read(getLoggedInUserProvider);
-    var userResult = await getLoggedInUser(null);
 
-    if (userResult case Success(value: final user)) {
+    var result = await getLoggedInUser(null);
+
+    if (result case Success(value: final user)) {
       state = AsyncData(user);
     }
   }
@@ -102,7 +95,8 @@ class UserData extends _$UserData {
     switch (result) {
       case Success(value: _):
         state = const AsyncData(null);
-      case Failed(message: final message):
+
+      case Failed(:final message):
         state = AsyncError(FlutterError(message), StackTrace.current);
         state = AsyncData(state.valueOrNull);
     }
@@ -117,23 +111,18 @@ class UserData extends _$UserData {
 
       if (result.isSuccess) {
         refreshUserData();
-        //refresh transaction data
         ref.read(transactionDataProvider.notifier).refreshTransactionData();
       }
     }
   }
 
-  Future<void> uploadProfilePicture({
-    required User user,
-    required File imageFile,
-  }) async {
-    UploadProfilePicture uploadProfilePicture = ref.read(
-      uploadProfilePictureProvider,
-    );
-
+  Future<void> uploadProfilePicture(
+      {required User user, required File imageFile}) async {
+    UploadProfilePicture uploadProfilePicture =
+        ref.read(uploadProfilePictureProvider);
     var result = await uploadProfilePicture(
-      UploadProfilePictureParam(user: user, imageFile: imageFile),
-    );
+        UploadProfilePictureParam(imageFile: imageFile, user: user));
+
     if (result case Success(value: final user)) {
       state = AsyncData(user);
     }
@@ -141,6 +130,6 @@ class UserData extends _$UserData {
 
   void _getMovies() {
     ref.read(nowPlayingProvider.notifier).getMovies();
-    ref.read(upComingProvider.notifier).getMovies();
+    ref.read(upcomingProvider.notifier).getMovies();
   }
 }

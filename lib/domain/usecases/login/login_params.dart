@@ -1,8 +1,9 @@
 part of 'login.dart';
 
-class LoginParam {
+class LoginParams {
   final String email;
   final String password;
 
-  LoginParam({required this.email, required this.password});
+  LoginParams({required this.email, required this.password});
+
 }

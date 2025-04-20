@@ -6,22 +6,16 @@ import 'package:bioskop/domain/entities/user.dart';
 
 class DummyUserRepository implements UserRepository {
   @override
-  Future<Result<User>> createUser({
-    required String uid,
-    required String email,
-    required String name,
-    String? photoUrl,
-    int balance = 0,
-  }) {
+  Future<Result<User>> createUser({required String uid, required String email, required String name, String? photoUrl, int balance = 0}) {
     // TODO: implement createUser
     throw UnimplementedError();
   }
 
   @override
   Future<Result<User>> getUser({required String uid}) async {
-    await Future.delayed(const Duration(seconds: 1));
-    return Result.success(
-      User(uid: uid, name: 'dummy', email: 'dummy@dummy.com'),
+   await Future.delayed(Duration(seconds: 1));
+   return Result.success(
+    User(uid: uid, email: 'dummy@dummy.com', name: 'dummy')
     );
   }
 
@@ -38,19 +32,13 @@ class DummyUserRepository implements UserRepository {
   }
 
   @override
-  Future<Result<User>> updateUserBalance({
-    required String uid,
-    required int balance,
-  }) {
+  Future<Result<User>> updateUserBalance({required String uid, required int balance}) {
     // TODO: implement updateUserBalance
     throw UnimplementedError();
   }
 
   @override
-  Future<Result<User>> uploadProfilePicture({
-    required User user,
-    required File imageFile,
-  }) {
+  Future<Result<User>> uploadProfilePicture({required User user, required File imageFile}) {
     // TODO: implement uploadProfilePicture
     throw UnimplementedError();
   }

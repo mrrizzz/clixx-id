@@ -1,12 +1,12 @@
 import 'package:bioskop/presentation/widgets/bottom_navbar_item.dart';
 import 'package:flutter/material.dart';
 
-class BottomNavBar extends StatelessWidget {
-  final List<BottomNavBarItem> items;
+class BottomNavbar extends StatelessWidget {
+  final List<BottomNavbarItem> items;
   final void Function(int index) onTap;
   final int selectedIndex;
 
-  const BottomNavBar(
+  const BottomNavbar(
       {super.key,
       required this.items,
       required this.onTap,

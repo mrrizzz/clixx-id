@@ -5,11 +5,10 @@ import 'package:bioskop/domain/usecases/usecase.dart';
 class Logout implements UseCase<Result<void>, void> {
   final Authentication _authentication;
 
-  Logout({required Authentication authentication}) : _authentication = authentication;
-
+  Logout({required Authentication authentication})
+    : _authentication = authentication;
   @override
-  Future<Result<void>> call(void _) async {
-    return await _authentication.logout();
+  Future<Result<void>> call(void _) {
+    return _authentication.logout();
   }
-
 }

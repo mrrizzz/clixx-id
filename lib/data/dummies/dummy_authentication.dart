@@ -1,7 +1,7 @@
 import 'package:bioskop/data/repositories/authentication.dart';
 import 'package:bioskop/domain/entities/result.dart';
 
-class DummyAuthentication implements Authentication{
+class DummyAuthentication implements Authentication {
   @override
   String? getLoggedInUserId() {
     // TODO: implement getLoggedInUserId
@@ -9,10 +9,10 @@ class DummyAuthentication implements Authentication{
   }
 
   @override
-  Future<Result<String>> login({required String email, required String password}) async {
-    await Future.delayed(const Duration(seconds: 1));
-    // return const Result.success('ID-12345');
-    return const Result.failed('message');
+  Future<Result<String>> login({required String email, required String password}) async{
+    await Future.delayed(Duration(seconds: 1));
+    return Result.success('ID-12345');
+    // return Result.failed('Gagal Login!');
   }
 
   @override

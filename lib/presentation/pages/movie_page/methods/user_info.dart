@@ -1,5 +1,6 @@
-import 'package:bioskop/presentation/extensions/integer_extension.dart';
+import 'package:bioskop/presentation/extensions/int_extensions.dart';
 import 'package:bioskop/presentation/misc/methods.dart';
+import 'package:bioskop/presentation/providers/router/router_provider.dart';
 import 'package:bioskop/presentation/providers/user_data/user_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -47,7 +48,7 @@ Widget userInfo(WidgetRef ref) => Padding(
               verticalSpace(5),
               GestureDetector(
                 onTap: () {
-                  // Go to wallet page
+                  ref.read(routerProvider).pushNamed('wallet');
                 },
                 child: Row(
                   children: [

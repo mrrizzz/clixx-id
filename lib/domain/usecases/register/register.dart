@@ -9,18 +9,20 @@ class Register implements UseCase<Result<User>, RegisterParam> {
   final Authentication _authentication;
   final UserRepository _userRepository;
 
-  Register({
-    required Authentication authentication,
-    required UserRepository userRepository,
-  })  : _authentication = authentication,
+  Register(
+    {
+      required Authentication authentication,
+      required UserRepository userRepository
+      })
+      : _authentication = authentication,
         _userRepository = userRepository;
-
+  
   @override
   Future<Result<User>> call(RegisterParam params) async {
     var uidResult = await _authentication.register(
       email: params.email,
-      password: params.password,
-    );
+      password: params.password
+      );
 
     if (uidResult.isSuccess) {
       var userResult = await _userRepository.createUser(
@@ -28,15 +30,15 @@ class Register implements UseCase<Result<User>, RegisterParam> {
         email: params.email,
         name: params.name,
         photoUrl: params.photoUrl,
-      );
-
-      if (userResult.isSuccess) {
+        );
+       if (userResult.isSuccess) {
         return Result.success(userResult.resultValue!);
-      }else{
+       } else {
         return Result.failed(userResult.errorMessage!);
-      }
+       } 
     } else {
       return Result.failed(uidResult.errorMessage!);
     }
   }
-}
+
+} 

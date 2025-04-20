@@ -6,19 +6,19 @@ part of 'upcoming_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$upComingHash() => r'115e3895d8003f23e94871edd910399912ed621d';
+String _$upcomingHash() => r'facbecc22bb4176510a1b662ac81ed89b029a0ce';
 
-/// See also [UpComing].
-@ProviderFor(UpComing)
-final upComingProvider = AsyncNotifierProvider<UpComing, List<Movie>>.internal(
-  UpComing.new,
-  name: r'upComingProvider',
+/// See also [Upcoming].
+@ProviderFor(Upcoming)
+final upcomingProvider = AsyncNotifierProvider<Upcoming, List<Movie>>.internal(
+  Upcoming.new,
+  name: r'upcomingProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$upComingHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$upcomingHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$UpComing = AsyncNotifier<List<Movie>>;
+typedef _$Upcoming = AsyncNotifier<List<Movie>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

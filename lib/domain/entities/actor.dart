@@ -4,11 +4,17 @@ part 'actor.freezed.dart';
 
 @freezed
 abstract class Actor with _$Actor {
-  factory Actor({
-    required String name,
-    String? profilePath
-  }) = _Actor;
 
-  factory Actor.fromJSON(Map<String, dynamic> json) =>
-      Actor(name: json['name'], profilePath: json['profile_path']);
+  factory Actor(
+    {
+      required String name,
+      String? profilePath,
+
+    }
+  ) = _Actor;
+
+  factory Actor.fromJSON(Map<String, dynamic> json) => Actor(
+    name: json['name'], 
+    profilePath: json['profile_path']
+    );
 }

@@ -1,7 +1,7 @@
-import 'package:bioskop/presentation/misc/methods.dart';
 import 'package:bioskop/presentation/pages/movie_page/methods/movie_list.dart';
 import 'package:bioskop/presentation/providers/movie/now_playing_provider.dart';
 import 'package:bioskop/presentation/providers/movie/upcoming_provider.dart';
+import 'package:bioskop/presentation/providers/router/router_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,24 +25,34 @@ class MoviePage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             userInfo(ref),
-            verticalSpace(40),
+            SizedBox(
+              height: 40,
+            ),
             searchBar(context),
-            verticalSpace(24),
+            SizedBox(
+              height: 24,
+            ),
             ...movieList(
               title: 'Now Playing',
               movies: ref.watch(nowPlayingProvider),
               onTap: (movie) {
-                // Move to movie detail page
+                ref.read(routerProvider).pushNamed('detail', extra: movie);
               },
             ),
-            verticalSpace(30),
+            SizedBox(
+              height: 30,
+            ),
             ...promotionList(promotionImageFileNames),
-            verticalSpace(30),
+            SizedBox(
+              height: 30,
+            ),
             ...movieList(
               title: 'Upcoming',
-              movies: ref.watch(upComingProvider),
+              movies: ref.watch(upcomingProvider),
             ),
-            verticalSpace(100)
+            SizedBox(
+              height: 100,
+            ),
           ],
         )
       ],

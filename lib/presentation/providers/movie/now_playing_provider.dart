@@ -17,15 +17,11 @@ class NowPlaying extends _$NowPlaying {
 
     GetMovieList getMovieList = ref.read(getMovieListProvider);
 
-    var result = await getMovieList(
-      GetMovieListParam(
-        page: page,
-        category: MovieListCategories.nowPlaying,
-      ),
-    );
+    var result = await getMovieList(GetMovieListParam(
+        category: MovieListCategories.nowPlaying, page: page));
 
-    switch(result){
-      case Success(value : final movies):
+    switch (result) {
+      case Success(value: final movies):
         state = AsyncData(movies);
       case Failed(message: _):
         state = const AsyncData([]);

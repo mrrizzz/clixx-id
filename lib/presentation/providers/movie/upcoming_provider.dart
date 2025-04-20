@@ -8,7 +8,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'upcoming_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-class UpComing extends _$UpComing {
+class Upcoming extends _$Upcoming {
   @override
   FutureOr<List<Movie>> build() => const [];
 
@@ -18,11 +18,7 @@ class UpComing extends _$UpComing {
     GetMovieList getMovieList = ref.read(getMovieListProvider);
 
     var result = await getMovieList(
-      GetMovieListParam(
-        page: page,
-        category: MovieListCategories.upComing,
-      ),
-    );
+        GetMovieListParam(category: MovieListCategories.upcoming, page: page));
 
     switch (result) {
       case Success(value: final movies):

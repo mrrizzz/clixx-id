@@ -8,12 +8,12 @@ Widget searchBar(BuildContext context) => Row(
           margin: const EdgeInsets.only(left: 24, right: 10),
           padding: const EdgeInsets.symmetric(horizontal: 15),
           decoration: BoxDecoration(
-              color: const Color(0xFF252836),
+              color: Color(0XFF252836),
               borderRadius: BorderRadius.circular(10)),
           child: TextField(
             style: TextStyle(color: Colors.grey.shade400),
             decoration: const InputDecoration(
-                hintText: 'Search movie',
+                hintText: 'Search Movie...',
                 border: InputBorder.none,
                 icon: Icon(Icons.search)),
           ),
@@ -22,17 +22,18 @@ Widget searchBar(BuildContext context) => Row(
           width: 80,
           height: 50,
           child: ElevatedButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
+            onPressed: () {},
+            child: const Center(
+              child: Icon(Icons.search),
+            ),
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
-              child: const Center(
-                child: Icon(Icons.search),
-              )),
-        )
+            ),
+          ),
+        ),
       ],
     );

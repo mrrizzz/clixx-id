@@ -7,7 +7,7 @@ part of 'upload_profile_picture_provider.dart';
 // **************************************************************************
 
 String _$uploadProfilePictureHash() =>
-    r'd4bf9009c7345fe6f29640f2dade1b9e90ca99ef';
+    r'57af72e64c99649f8c4fe5fadc8fd94013200b7a';
 
 /// See also [uploadProfilePicture].
 @ProviderFor(uploadProfilePicture)

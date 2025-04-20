@@ -6,7 +6,7 @@ part of 'now_playing_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$nowPlayingHash() => r'3ab34a8eeebbd2f12cd838da8819bbfb24bba794';
+String _$nowPlayingHash() => r'ef3a3b3191002cfffe2dc6b58c4c70d53b797157';
 
 /// See also [NowPlaying].
 @ProviderFor(NowPlaying)

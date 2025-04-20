@@ -1,15 +1,13 @@
-import 'package:bioskop/presentation/extensions/build_context_extension.dart';
-import 'package:bioskop/presentation/misc/methods.dart';
+import 'package:bioskop/presentation/extensions/build_context_extensions.dart';
 import 'package:bioskop/presentation/providers/router/router_provider.dart';
 import 'package:bioskop/presentation/providers/user_data/user_data_provider.dart';
-import 'package:bioskop/presentation/widgets/clix_text_field.dart';
+import 'package:bioskop/presentation/widgets/flix_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginPage extends ConsumerWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
   LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -30,38 +28,43 @@ class LoginPage extends ConsumerWidget {
     return Scaffold(
       body: ListView(
         children: [
-          verticalSpace(100),
+          const SizedBox(height: 100),
           Center(
             child: Image.asset(
               'assets/logo.png',
-              width: 250,
+              width: 150,
             ),
           ),
-          verticalSpace(100),
+          const SizedBox(height: 100),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10.0),
             child: Column(
               children: [
-                ClixTextField(
-                  label: 'Email',
+                FlixTextField(
+                  labelText: 'email',
                   controller: emailController,
                 ),
-                verticalSpace(24),
-                ClixTextField(
-                  label: 'Password',
+                const SizedBox(
+                  height: 24,
+                ),
+                FlixTextField(
+                  labelText: 'password',
                   controller: passwordController,
                   obscureText: true,
                 ),
                 Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
                       onPressed: () {},
                       child: const Text(
-                        'Forgot password?',
+                        'Forgot Password?',
                         style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    )),
-                verticalSpace(24),
+                      )),
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
                 switch (ref.watch(userDataProvider)) {
                   AsyncData(:final value) => value == null
                       ? SizedBox(
@@ -82,16 +85,19 @@ class LoginPage extends ConsumerWidget {
                         ),
                   _ => const Center(
                       child: CircularProgressIndicator(),
-                    ),
+                    )
                 },
-                verticalSpace(24),
+                const SizedBox(
+                  height: 24,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Don't have an account? "),
+                    const Text("Don't have an Account?"),
                     TextButton(
-                      
-                        onPressed: () {ref.read(routerProvider).goNamed('register');},
+                        onPressed: () {
+                          ref.read(routerProvider).goNamed('register');
+                        },
                         child: const Text(
                           'Register here',
                           style: TextStyle(fontWeight: FontWeight.bold),

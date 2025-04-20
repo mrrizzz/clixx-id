@@ -91,7 +91,7 @@ as int,
 @JsonSerializable()
 
 class _Transaction implements Transaction {
-   _Transaction({this.id, required this.uid, this.transactionTime, this.transactionImage, required this.title, final  List<String> seats = const [], this.theaterName, this.watchingTime, this.ticketAmount, this.ticketPrice, required this.adminFee, required this.total}): _seats = seats;
+  const _Transaction({this.id, required this.uid, this.transactionTime, this.transactionImage, required this.title, final  List<String> seats = const [], this.theaterName, this.watchingTime, this.ticketAmount, this.ticketPrice, required this.adminFee, required this.total}): _seats = seats;
   factory _Transaction.fromJson(Map<String, dynamic> json) => _$TransactionFromJson(json);
 
 @override final  String? id;

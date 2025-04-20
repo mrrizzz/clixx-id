@@ -4,10 +4,12 @@ class RegisterParam {
   final String password;
   final String? photoUrl;
 
-  RegisterParam({
+  RegisterParam(
+    {
     required this.name,
     required this.email,
     required this.password,
-    this.photoUrl,
-  });
+    this.photoUrl
+    }
+  );
 }

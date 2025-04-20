@@ -4,27 +4,31 @@ import 'package:bioskop/domain/entities/result.dart';
 import 'package:bioskop/domain/entities/user.dart';
 import 'package:bioskop/domain/usecases/usecase.dart';
 
-class GetLoggedInUser implements UseCase<Result<User>, void>{
+class GetLoggedInUser implements UseCase<Result<User>, void> {
   final Authentication _authentication;
   final UserRepository _userRepository;
 
-  GetLoggedInUser({required Authentication authentication, required UserRepository userRepository})
-      : _authentication = authentication,
+  GetLoggedInUser(
+    {
+      required Authentication authentication,
+      required UserRepository userRepository})
+      : _authentication = authentication, 
         _userRepository = userRepository;
 
   @override
-  Future<Result<User>> call(void _) async {
-    var loggedInUid = _authentication.getLoggedInUserId();
-    if (loggedInUid != null) {
-      var userResult = await _userRepository.getUser(uid: loggedInUid);
+  Future<Result<User>> call(void params) async {
+   String? loggedId = _authentication.getLoggedInUserId();
 
-      if (userResult.isSuccess) {
-        return Result.success(userResult.resultValue!);
-      }else{
-        return Result.failed(userResult.errorMessage!);
-      }
+   if(loggedId != null) {
+    var userResult = await _userRepository.getUser(uid: loggedId);
+
+    if(userResult.isSuccess) {
+      return Result.success(userResult.resultValue!);
     } else {
-      return Result.failed('No user logged in');
+      return Result.failed(userResult.errorMessage!);
     }
+   } else {
+    return Result.failed("No User logged in!");
+   }
   }
 }

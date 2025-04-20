@@ -79,7 +79,7 @@ as String?,
 
 
 class _Movie implements Movie {
-   _Movie({required this.id, required this.title, this.posterPath});
+  const _Movie({required this.id, required this.title, this.posterPath});
   
 
 @override final  int id;

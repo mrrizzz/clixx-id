@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class BottomNavBarItem extends StatelessWidget {
+class BottomNavbarItem extends StatelessWidget {
   final int index;
   final bool isSelected;
   final String title;
   final String image;
   final String selectedImage;
 
-  const BottomNavBarItem(
+  const BottomNavbarItem(
       {super.key,
       required this.index,
       required this.isSelected,
